@@ -1,0 +1,9 @@
+# config/iterable.yml
+
+development:
+  api_key: 'your_development_api_key'
+  base_url: 'https://api.iterable.com/api/'
+
+test:
+  api_key: 'your_test_api_key'
+  base_url: 'https://api.iterable.com/api/'
