@@ -2,6 +2,7 @@
     <h1 class="text-center" >Welcome to Coffee Notif</h1>
     <% if current_user %>
         <h5><%= current_user.email %></h5>
+        <h5><%= link_to('My Events', events_path, class: 'btn btn-danger m-5') %></h5>
     <%end%>
     <%=
         link_to_if(current_user.nil?, "Login", new_user_session_path, class: 'btn btn-primary m-5') do
