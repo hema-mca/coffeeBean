@@ -1,0 +1,30 @@
+<h3>Events</h2>
+<p>Total Count: <%= @events.count %></p>
+
+<%= form_tag events_path, :method => "get" do %>
+  <%= label_tag(:search, "Which Event Type?") %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag("search", :name => nil) %>
+  <% end %>
+<table border="1">
+  <tr>
+    <th align="center">S.No</th>
+    <th align="center">Type</th>
+    <th align="center">UserID</th>
+    <th align="center">CreatedAt</th>
+  </tr>
+  <% @events.each_with_index do |event, index| %>
+    <% if event.user_id == current_user.id %>
+    <tr>
+    <td align="center"><%= index+1 %></td>
+    <td align="center"><%= event.type %></td>
+    <td align="center"><%= event.user_id %></td>
+    <td align="center"><%= event.created_at.to_formatted_s(:db) %></td>
+  </tr>
+  <% else %>
+    <%= puts "No events to display" %>
+    <% end %>
+  <% end %>
+
+</table>
+<%= link_to('Home',  root_path, class: 'btn btn-danger m-5') %>

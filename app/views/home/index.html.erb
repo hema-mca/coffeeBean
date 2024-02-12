@@ -1,24 +1,37 @@
 <section class="text-center m-5">
-    <h1 class="text-center" >Welcome to Coffee Notif</h1>
+    <h1 class="text-center" >Welcome 
     <% if current_user %>
         <h5><%= current_user.email %></h5>
-        <h5><%= link_to('My Events', events_path, class: 'btn btn-danger m-5') %></h5>
+        <h3><%= link_to('Show My Events', events_path, class: 'btn btn-danger m-5') %></h3>
     <%end%>
-    <%=
-        link_to_if(current_user.nil?, "Login", new_user_session_path, class: 'btn btn-primary m-5') do
-            link_to('Sign out',  destroy_user_session_path, :method => 'delete', class: 'btn btn-danger m-5')
-        end
-    %>
+    </h1>
+   
 
 </section>
-
 
 
 <section>
+<table>
+<tr>
+    <th>
+    
+    <%= button_to('Event A',  events_path(type: 'A'), class: 'btn btn-danger m-5') %>
+    </th>
+<th>&nbsp;</th>
+<th>&nbsp;</th>
 
-     <%= link_to('Event A',  event_a_path, class: 'btn btn-danger m-5') %>
 
-
-    <%= link_to('Event B',  event_b_path, class: 'btn btn-danger m-5') %>
+    <th><%= button_to('Event B',  events_path(type: 'B'), class: 'btn btn-danger m-5') %></th>
+    </tr>
+    </table>
 
 </section>
+<br/><br/>
+<section>
+<%=
+link_to_if(current_user.nil?, "Login", new_user_session_path, class: 'btn btn-primary m-5') do
+    link_to('Sign out',  destroy_user_session_path, :method => 'delete', class: 'btn btn-danger m-5')
+end
+%>
+</section>
+
