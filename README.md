@@ -1,24 +1,24 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+* GET Events
 
-* Ruby version
+```
+curl http://localhost:4343/api/v1/events.json
 
-* System dependencies
+```
 
-* Configuration
+* POST Events
 
-* Database creation
+** Request:
 
-* Database initialization
+```
+curl -X POST http://localhost:4343/api/v1/events.json -H 'Content-Type: application/json' -d '{"user_id":"1","type":"B"}'
+```
 
-* How to run the test suite
+** Response: 
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+{"success":true,
+"event":{"id":20,"user_id":1,"created_at":"2024-02-12T07:58:01.218Z","updated_at":"2024-02-12T07:58:01.218Z"},
+"message":"Event B created successfully!"}
+```
