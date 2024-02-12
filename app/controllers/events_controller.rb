@@ -4,9 +4,9 @@ class EventsController < ApplicationController
   before_action :log_user
 
   def index
-    @events = Event.search(params[:search])
+    @events = Event.search(params[:search]).order(id: :desc)
     respond_to do |format|
-      format.html 
+      format.html
       format.json { render json: {success: true, events: @events}}
     end
    end
@@ -19,14 +19,14 @@ class EventsController < ApplicationController
       flash[:alert] = msg
       respond_to do |format|
         format.html { redirect_to root_path }
-        format.json { render json: {success: true, message: msg}}
+        format.json { render json: {success: true, event: service.event, message: msg}}
       end
     else
       msg = "Event creation Failed!!"
       flash[:notice] = msg
       respond_to do |format|
         format.html { redirect_to root_path }
-        format.json { render json: {success: false, message: msg}}
+        format.json { render json: {success: false, event: nil, message: msg}}
       end
     end
   end
