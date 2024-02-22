@@ -9,15 +9,8 @@ class Api::V1::EventsController < BaseController
   end
 
   def create
-    service = EventService.new(type: params[:type], user: @user)
-
-    if service.call
-      msg = "Event #{params[:type]} created successfully!"
-      render json: { success: true, event: service.event, message: msg }
-    else
-      msg = "Event creation Failed!!"
-      render json: { success: false, event: nil, message: msg }
-    end
+    response = EventService.new(type: params[:type], user: @user).call
+    render json: response
   end
 
   private

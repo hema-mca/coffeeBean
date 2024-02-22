@@ -12,21 +12,20 @@ class EventsController < ApplicationController
    end
 
   def create
-    service = EventService.new(type: params[:type], user: current_user)
-
-    if service.call
+    response = EventService.new(type: params[:type], user: current_user).call
+    if response[:success]
       msg = "Event #{params[:type]} created successfully!"
       flash[:alert] = msg
       respond_to do |format|
         format.html { redirect_to root_path }
-        format.json { render json: {success: true, event: service.event, message: msg}}
+        format.json { render json: response }
       end
     else
       msg = "Event creation Failed!!"
       flash[:notice] = msg
       respond_to do |format|
         format.html { redirect_to root_path }
-        format.json { render json: {success: false, event: nil, message: msg}}
+        format.json { render json: response }
       end
     end
   end
