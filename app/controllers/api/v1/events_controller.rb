@@ -3,7 +3,7 @@ class Api::V1::EventsController < BaseController
   before_action :set_user
 
   def index
-    @events = Event.search(params[:search]).order(id: :desc).decorate
+    @events = @user.events.order(id: :desc).decorate
 
     render json: { success: true, events: @events }
   end
@@ -17,5 +17,6 @@ class Api::V1::EventsController < BaseController
 
   def set_user
     @user = User.find_by(id: params[:user_id])
+    render json: { success: false, events: [], errors: ['User must be present'] }, status: 400 and return unless @user
   end
 end

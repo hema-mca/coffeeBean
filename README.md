@@ -1,13 +1,41 @@
 
 
-* GET Events
+Running Testcases:
+
+change the path to the application and run the rspec command to run the event service spec.
+```
+cd coffee_notif
+
+$ rspec spec/services/event_service_spec.rb
 
 ```
-curl http://localhost:4343/api/v1/events.json
+The above command output should display like below image.
+
+![Screenshot from 2024-02-23 15-07-30.png](..%2F..%2FPictures%2FScreenshots%2FScreenshot%20from%202024-02-23%2015-07-30.png)
+
+* GET(200) Events:
 
 ```
+http://localhost:4343/api/v1/events?user_id=1
+```
 
-* POST Events
+* GET(400) Events:
+
+```
+http://localhost:4343/api/v1/events
+```
+Response:
+```
+{
+success: false,
+events: [ ],
+errors: [
+"User must be present"
+]
+}
+```
+
+* POST Events:
 
 ** Valid Request:
 
