@@ -4,7 +4,14 @@ class EventsController < ApplicationController
   before_action :log_user
 
   def index
-    @events = Event.search(params[:search]).order(id: :desc)
+    @events = Event.all.order(id: :desc).decorate
+    respond_to do |format|
+      format.html
+      format.json { render json: {success: true, events: @events}}
+    end
+  end
+  def search
+    @events = Event.search(params[:search]).order(id: :desc).decorate
     respond_to do |format|
       format.html
       format.json { render json: {success: true, events: @events}}
