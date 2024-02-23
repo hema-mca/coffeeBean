@@ -1,6 +1,8 @@
 class Event < ApplicationRecord
   belongs_to :user
 
+  validates :type, presence: true
+
   self.per_page = 10
 
   def self.search(search)
